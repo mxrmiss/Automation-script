@@ -18,20 +18,28 @@ def renameall():
     os.chdir(file_name)  # 将当前工作目录修改为待修改文件夹的位置
 
     # 将不含有前缀名的文件添加到列表中
-    for m in fileList:
-        if fst_name in m:
+    for fileName in fileList:
+        if fst_name in fileName:
             num += 1
         else:
-            m_list.append(m)
+            m_list.append(fileName)
 
     # 判断列表内容是否为空
     if m_list:
         # 遍历文件夹中所有文件
         for fileName in m_list:
-            pat = ".+\.(jpg|png|jpeg)"  # 匹配文件名正则表达式
-            pattern = re.findall(pat, fileName)  # 进行匹配
-            os.rename(fileName, (fst_name + str(num) + '.' + pattern[0]))  # 文件重新命名
-            num += 1
+            # 判断文件是否有后缀名
+            if "." not in fileName:
+                # 没有后缀名直接添加后缀名
+                os.rename(fileName, (fst_name + str(num) + '.jpg'))
+                print(fileName)
+                num += 1
+            # 有后缀名匹配后缀名
+            else:
+                pat = ".+\.(jpg|png|jpeg)"  # 匹配文件名正则表达式
+                pattern = re.findall(pat, fileName)  # 进行匹配
+                os.rename(fileName, (fst_name + str(num) + '.' + pattern[0]))  # 文件重新命名
+                num += 1
         print("---------------------------------------------------")
         os.chdir(currentpath)  # 改回程序运行前的工作目录
         sys.stdin.flush()  # 刷新
@@ -43,5 +51,5 @@ def renameall():
 
 try:
     renameall()
-except :
+except:
     print("出错了!!!!快用999小葵花牌感冒灵 :)")
