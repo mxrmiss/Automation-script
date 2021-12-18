@@ -13,16 +13,16 @@ def renameall():
     m_list = []  # 未含有前缀名的文件列表
     num = 1  # 名称变量
     fileList = os.listdir(file_name)  # 待修改文件夹
-    print("修改前：" + str(fileList))  # 输出文件夹中包含的文件
+    print("修改前：\n" + str(fileList))  # 输出文件夹中包含的文件
     currentpath = os.getcwd()  # 得到进程当前工作目录
     os.chdir(file_name)  # 将当前工作目录修改为待修改文件夹的位置
-
     # 将不含有前缀名的文件添加到列表中
     for fileName in fileList:
         if fst_name in fileName:
             num += 1
         else:
             m_list.append(fileName)
+    print('可以修改的文件名列表：\n{}' .format(m_list))
 
     # 判断列表内容是否为空
     if m_list:
