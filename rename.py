@@ -49,7 +49,8 @@ def renameall():
         return None
 
 
-try:
-    renameall()
-except:
-    print("出错了!!!!快用999小葵花牌感冒灵 :)")
+# try:
+#     renameall()
+# except:
+#     print("出错了!!!!快用999小葵花牌感冒灵 :)")
+renameall()
