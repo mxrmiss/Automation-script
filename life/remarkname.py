@@ -14,17 +14,21 @@ file_list = os.listdir(mark_url)  # 待修改文件夹
 print("修改前：\n" + str(file_list))  # 输出文件夹中包含的文件
 current_path = os.getcwd()  # 得到进程当前工作目录
 os.chdir(mark_url)  # 将当前工作目录修改为待修改文件夹的位置
+# 每篇文章只修改一处内容
 
 for filename in file_list:
+    count = 1
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
     with open(filename, 'w', encoding='utf-8') as f:
-        # 查看文件是否相匹配
-        if modify_it in content:
-            modify_list.append(filename)
-            # 替换文件内容
-            file = par.sub(want_it, content)
-            f.write(file)
+        # 查看文件是否相匹配，使用while循环，每次只修改一次
+        while count == 1:
+            if (modify_it in content) and (modify_it != ""):
+                modify_list.append(filename)
+                # 替换文件内容
+                file = par.sub(want_it, content)
+                f.write(file)
+                count -= 1
 
 if modify_list:
     print('可修改的文件名为：\n', modify_list)
@@ -34,4 +38,3 @@ else:
 
 os.chdir(current_path)  # 改回程序运行前的工作目录
 sys.stdin.flush()  # 刷新
-
